@@ -1,6 +1,9 @@
 #include "always.h"
 #include "compose.h"
+#include "is_callable.h"
 #include <iostream>
+#include <functional>
+#include <string>
 
 namespace compose_test
 {
@@ -23,6 +26,19 @@ namespace compose_test
     };
 }
 
+namespace is_callable_test
+{
+    struct is_callable_class
+    {
+        void operator()(int) const
+        {}
+    };
+    struct callable_test_param {};
+    
+    void is_callable_function(int)
+    {}
+}
+
 int main()
 {
     // always test
@@ -32,5 +48,9 @@ int main()
 
     // compose test
     fpcpp::compose(compose_test::increment(), compose_test::decrement(), compose_test::increment())(3);
+    
+    // is_callable test
+    static_assert(fpcpp::is_callable<std::function<void(int)>(int)>::value, "callable");
+    static_assert(fpcpp::is_callable<std::function<void(int)>(char)>::value, "callable");
     return 0;
 }
