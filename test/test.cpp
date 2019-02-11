@@ -1,6 +1,6 @@
-#include "always.h"
-#include "compose.h"
-#include "is_callable.h"
+#include "../fpcpp/always.h"
+#include "../fpcpp/compose.h"
+#include "../fpcpp/is_callable.h"
 #include <iostream>
 #include <functional>
 #include <string>
